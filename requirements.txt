@@ -1,0 +1,13 @@
+Flask==2.3.2
+flask-paginate==2022.1.8
+Flask-SQLAlchemy==3.0.5
+jsonify==0.5
+keras==2.10.0
+mysql-connector-python==8.0.33
+pandas==2.0.3
+Pillow==10.0.0
+SQLAlchemy==2.0.16
+tensorflow-cpu==2.10.1
+tensorflow-text==2.10.0
+gunicorn
+wheel
