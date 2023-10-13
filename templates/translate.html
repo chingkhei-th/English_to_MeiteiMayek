@@ -1,0 +1,41 @@
+{% extends 'b.html' %}
+
+{% block title %} Home {% endblock %}
+
+
+{% block body %} 
+<form id="translateForm">
+    <input type="hidden" name="_method" value="POST">
+    <div id="content">
+        <select id="sourceLang">
+            <option value="en">English</option>
+        </select>
+        <textarea id="sourceText" placeholder="Enter text to translate"></textarea>
+        <button id="translateButton" class="btn btn-primary">Translate</button>
+        <br><br>
+        <textarea id="translatedText" placeholder="Translated text will appear here" readonly></textarea>
+    </div>
+    <br>
+    <br>
+</form>
+<script>
+    jQuery(document).ready(function($) {
+        $('#translateButton').click(function () {
+            event.preventDefault();
+
+            console.log("Translate button clicked");
+            const sourceText = $('#sourceText').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                data: JSON.stringify({ text: sourceText }),
+                contentType: 'application/json',
+                success: function (response) {
+                    $('#translatedText').val(response.translated);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'b.html' %}
+
+{% block title %} Word Translation {% endblock %}
+
+{% block header %} Database {% endblock %}
+
+
+{% block body %} 
+<a href="{{ url_for('download_csv') }}" class="btn btn-sm">Download CSV</a>
+    <!-- <a href="{{ url_for('input_data')}}" class="btn btn-primary" style="margin-bottom:1.3rem;">ADD TEXT</a> -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>DATA</strong> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">English</th>
+                <th scope="col">Meitei Mayek</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in data %}
+                <tr>
+                    <td scope="row">{{ loop.index }}</td>
+                    <td>{{ data.english }}</td>
+                    <td>{{ data.meitei_mayek }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_data', id=data.id ) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ url_for('delete', id=data.id ) }}" class="btn btn-danger btn-sm" onclick="return confirm('Delete Confirm?')">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        
+        </tbody>
+    </table>
+{% endblock %}
